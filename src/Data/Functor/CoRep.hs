@@ -20,6 +20,9 @@ import Data.Functor.Identity
 -- coIndex . coTabulate = id
 -- coTabulate . coIndex = id
 -- @
+--
+-- Note: Only functors that always contain a value can be CoRepresentable,
+-- as we need to extract both the position (CoRep f) and the value (a).
 class Functor f => CoRepresentable f where
   type CoRep f
   
@@ -34,4 +37,11 @@ instance CoRepresentable Identity where
   type CoRep Identity = ()
   coTabulate (Identity a) = ((), a)
   coIndex ((), a) = Identity a
+
+-- | The tuple functor (,) r is corepresentable with r as its corep
+-- This is the canonical example: the tuple already has the form (CoRep f, a)
+instance CoRepresentable ((,) r) where
+  type CoRep ((,) r) = r
+  coTabulate (r, a) = (r, a)
+  coIndex (r, a) = (r, a)
 
