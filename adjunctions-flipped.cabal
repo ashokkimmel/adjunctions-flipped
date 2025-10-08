@@ -1,0 +1,29 @@
+cabal-version:      2.4
+name:               adjunctions-flipped
+version:            0.1.0.0
+synopsis:           CoRepresentable functors with tuple-based conversions
+description:        Provides CoRepresentable and CoDistributive functors where conversion functions use tuples
+license:            BSD-3-Clause
+author:             Ashok Kimmel
+maintainer:         ashokkimmel@example.com
+category:           Control
+build-type:         Simple
+
+common warnings
+    ghc-options: -Wall
+
+library
+    import:           warnings
+    exposed-modules:  Data.Functor.CoRep
+    build-depends:    base >=4.14 && <5
+    hs-source-dirs:   src
+    default-language: Haskell2010
+
+test-suite adjunctions-flipped-test
+    import:           warnings
+    default-language: Haskell2010
+    type:             exitcode-stdio-1.0
+    hs-source-dirs:   test
+    main-is:          Main.hs
+    build-depends:    base >=4.14 && <5
+                    , adjunctions-flipped
