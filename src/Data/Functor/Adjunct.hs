@@ -55,7 +55,7 @@ instance (Functor f, Functor u, Functor m) => Functor (AdjunctT f u m) where
   fmap f (AdjunctT ufa) = AdjunctT (fmap (fmap (fmap f)) ufa)
 
 -- Applicative instance
-instance (Adjunct f u, Applicative m) => Applicative (AdjunctT f u m) where
+instance (Adjunct f u, Monad m) => Applicative (AdjunctT f u m) where
   pure a = AdjunctT (unit (pure a))
   (<*>) = ap
 
